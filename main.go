@@ -18,5 +18,6 @@ func main() {
 	server := NewHttpServer("test server")
 	server.Route("/read_body_once", demo.ReadBodyOnce)
 	server.Route("/read_url", demo.WholeUrl)
+	server.Route("/sign_up", SignUp)
 	server.Start(":3000")
 }
