@@ -14,8 +14,8 @@ type SdkHttpServer struct {
 // 註冊路由
 func (s *SdkHttpServer) Route(pattern string, handleFunc func(c *Context)) {
 	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
-		context := Context{W: w, R: r}
-		handleFunc(&context)
+		context := NewContext(w, r)
+		handleFunc(context)
 	})
 }
 
