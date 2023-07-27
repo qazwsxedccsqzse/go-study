@@ -18,6 +18,9 @@ func main() {
 	// type demo
 	// TestType()
 
+	// struct demo
+	// TestStruct()
+
 	server := NewHttpServer("test server")
 	server.Route("/read_body_once", demo.ReadBodyOnce)
 	server.Route("/read_url", demo.WholeUrl)
