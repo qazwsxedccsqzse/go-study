@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"neilwang.com/go-study/demo"
 )
 
@@ -11,9 +9,14 @@ func main() {
 	// 1. 註冊路由
 	// 2. 監聽並且啟動 server
 
-	// http body 讀一次就消失
-	http.HandleFunc("/read_body_once", demo.ReadBodyOnce)
-	// http request.URL 只有 path 拿得到資料
-	http.HandleFunc("/read_url", demo.WholeUrl)
-	http.ListenAndServe(":3000", nil)
+	// // http body 讀一次就消失
+	// http.HandleFunc("/read_body_once", demo.ReadBodyOnce)
+	// // http request.URL 只有 path 拿得到資料
+	// http.HandleFunc("/read_url", demo.WholeUrl)
+	// http.ListenAndServe(":3000", nil)
+
+	server := NewHttpServer("test server")
+	server.Route("/read_body_once", demo.ReadBodyOnce)
+	server.Route("/read_url", demo.WholeUrl)
+	server.Start(":3000")
 }
