@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -43,7 +42,8 @@ func (c *Context) WriteJson(code int, data interface{}) error {
 	c.W.Header().Set("Content-Type", "application/json")
 	// 寫入狀態碼
 	c.W.WriteHeader(code)
-	fmt.Fprintf(c.W, string(responseJson))
 
-	return nil
+	_, err = c.W.Write(responseJson)
+
+	return err
 }

@@ -33,5 +33,9 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 
 	// 假設成功
 	userMap := &map[string]int{"id": 1}
-	context.WriteJson(http.StatusOK, userMap)
+	err = context.WriteJson(http.StatusOK, userMap)
+	if err != nil {
+		fmt.Printf("context write json 失敗, %s", err.Error())
+		return
+	}
 }
