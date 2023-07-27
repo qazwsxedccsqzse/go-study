@@ -1,9 +1,5 @@
 package main
 
-import (
-	"neilwang.com/go-study/demo"
-)
-
 func main() {
 	// 這個 main 函數就做兩件事情
 	// 1. 註冊路由
@@ -22,8 +18,8 @@ func main() {
 	// TestStruct()
 
 	server := NewHttpServer("test server")
-	server.Route("/read_body_once", demo.ReadBodyOnce)
-	server.Route("/read_url", demo.WholeUrl)
+	// server.Route("/read_body_once", demo.ReadBodyOnce)
+	// server.Route("/read_url", demo.WholeUrl)
 	server.Route("/sign_up", SignUp)
 	server.Start(":3000")
 }

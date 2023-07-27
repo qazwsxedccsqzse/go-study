@@ -3,7 +3,7 @@ package main
 import "net/http"
 
 type Server interface {
-	Route(pattern string, handleFunc http.HandlerFunc)
+	Route(pattern string, handleFunc func(c *Context))
 	Start(address string) error
 }
 
@@ -12,8 +12,11 @@ type SdkHttpServer struct {
 }
 
 // 註冊路由
-func (s *SdkHttpServer) Route(pattern string, handleFunc http.HandlerFunc) {
-	http.HandleFunc(pattern, handleFunc)
+func (s *SdkHttpServer) Route(pattern string, handleFunc func(c *Context)) {
+	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
+		context := Context{W: w, R: r}
+		handleFunc(&context)
+	})
 }
 
 // 啟動 server

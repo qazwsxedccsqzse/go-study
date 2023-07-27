@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 )
 
 // 定義請求
@@ -19,12 +18,10 @@ type CommonResponse struct {
 	Data    interface{} `json:"data"`
 }
 
-func SignUp(w http.ResponseWriter, r *http.Request) {
+func SignUp(context *Context) {
 	// 先產生 sign up request
 	req := new(SignUpRequest)
 
-	// new context
-	context := Context{W: w, R: r}
 	err := context.ReadJson(req)
 	if err != nil {
 		context.BadRequestJson(err)
