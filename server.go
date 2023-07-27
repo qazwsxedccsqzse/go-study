@@ -37,5 +37,8 @@ func (s *SdkHttpServer) Start(address string) error {
 func NewHttpServer(name string) Server {
 	server := &SdkHttpServer{name: name}
 
+	// 這裡切記要初始化 HandlerBasedOnMap 與 HandlerBasedOnMap.handlers
+	server.handler = &HandlerBasedOnMap{}
+	server.handler.handlers = make(map[string]func(ctx *Context))
 	return server
 }
