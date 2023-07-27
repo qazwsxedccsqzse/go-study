@@ -27,13 +27,13 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	context := Context{W: w, R: r}
 	err := context.ReadJson(req)
 	if err != nil {
-		fmt.Fprintf(w, "context read json 失敗, %v", err)
+		context.BadRequestJson(err)
 		return
 	}
 
 	// 假設成功
 	userMap := &map[string]int{"id": 1}
-	err = context.WriteJson(http.StatusOK, userMap)
+	err = context.SuccessJson(userMap)
 	if err != nil {
 		fmt.Printf("context write json 失敗, %s", err.Error())
 		return

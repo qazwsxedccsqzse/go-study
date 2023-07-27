@@ -47,3 +47,11 @@ func (c *Context) WriteJson(code int, data interface{}) error {
 
 	return err
 }
+
+func (c *Context) SuccessJson(data interface{}) error {
+	return c.WriteJson(http.StatusOK, data)
+}
+
+func (c *Context) BadRequestJson(data interface{}) error {
+	return c.WriteJson(http.StatusBadRequest, data)
+}
