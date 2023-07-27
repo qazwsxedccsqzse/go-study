@@ -15,6 +15,9 @@ func main() {
 	// http.HandleFunc("/read_url", demo.WholeUrl)
 	// http.ListenAndServe(":3000", nil)
 
+	// type demo
+	// TestType()
+
 	server := NewHttpServer("test server")
 	server.Route("/read_body_once", demo.ReadBodyOnce)
 	server.Route("/read_url", demo.WholeUrl)
