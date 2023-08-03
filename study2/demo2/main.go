@@ -16,6 +16,8 @@ func Write(ch chan<- int) {
 
 // 限制 channel 只能讀出資料
 func Read(ch <-chan int) {
+	// 這行會噴錯, 原因是因為這裡只能讀取
+	// ch <- 1
 	for value := range ch { // 使用 range 迭代通道，直到通道被关闭
 		fmt.Println("读取:", value)
 	}
