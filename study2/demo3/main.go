@@ -16,8 +16,6 @@ func main() {
 		ch <- str[i]
 	}
 
-	next <- 1
-
 	close(ch)
 
 	go func() {
@@ -31,7 +29,7 @@ func main() {
 				fmt.Println("goroutine01", string(v))
 			} else {
 				// 會造成兩邊都關 channel
-				close(ch)
+				close(next)
 				return
 			}
 			next <- nextSignal
@@ -49,12 +47,13 @@ func main() {
 				fmt.Println("goroutine02", string(v))
 			} else {
 				// 會造成兩邊都關 channel
-				close(ch)
+				close(next)
 				return
 			}
 			next <- nextSignal
 		}
 	}()
 
+	next <- 1
 	wg.Wait()
 }
