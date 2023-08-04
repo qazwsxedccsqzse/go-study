@@ -23,7 +23,10 @@ func main() {
 	go func() {
 		defer wg.Done()
 		for {
-			<-next
+			nextSignal, ok := <-next
+			if !ok {
+				return
+			}
 			if v, ok := <-ch; ok {
 				fmt.Println("goroutine01", string(v))
 			} else {
@@ -31,14 +34,17 @@ func main() {
 				close(ch)
 				return
 			}
-			next <- 1
+			next <- nextSignal
 		}
 	}()
 
 	go func() {
 		defer wg.Done()
 		for {
-			<-next
+			nextSignal, ok := <-next
+			if !ok {
+				return
+			}
 			if v, ok := <-ch; ok {
 				fmt.Println("goroutine02", string(v))
 			} else {
@@ -46,7 +52,7 @@ func main() {
 				close(ch)
 				return
 			}
-			next <- 1
+			next <- nextSignal
 		}
 	}()
 
